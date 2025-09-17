@@ -1,0 +1,41 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/shared/*"
+  to = "/.netlify/functions/get-portfolio?id=:splat"
+  status = 200
+
+[[redirects]]
+  from = "/portfolio/*"
+  to = "/.netlify/functions/get-portfolio?id=:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/generate-from-resume"
+  to = "/.netlify/functions/generate-portfolio"
+  status = 200
+
+[[redirects]]
+  from = "/api/create-manual-portfolio"
+  to = "/.netlify/functions/generate-portfolio"
+  status = 200
+
+[[redirects]]
+  from = "/api/update-portfolio/*"
+  to = "/.netlify/functions/generate-portfolio"
+  status = 200
+
+[[redirects]]
+  from = "/health"
+  to = "/.netlify/functions/generate-portfolio"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
